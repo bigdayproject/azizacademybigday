@@ -1,0 +1,14 @@
+# Frontend: Netlify. Backend: Railway.
+# Netlify sozlamalarida (Site configuration -> Environment variables) API_URL ni kiriting.
+[build]
+  base = "client"
+  command = "npm install && npm run build:netlify"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,169 @@
+/* ============================================================
+   Dizayn tizimi: doska (logotip ko‘ki) + katakli daftar varag‘i
+   ============================================================ */
+:root {
+  --board: #0a1163;
+  --board-2: #1420c8;
+  --chalk: #f4f6ff;
+  --chalk-dim: #b3bbf5;
+  --chalk-line: rgba(244, 246, 255, 0.24);
+
+  --paper: #fbfcff;
+  --grid: #e4e8fb;
+  --ink: #15223d;
+  --ink-soft: #56627c;
+  --line: #d5deec;
+
+  --pen: #1420e6;
+  --pen-soft: #e8eaff;
+  --marker: #ffffff;
+  --marker-d: #d6dbff;
+  --red: #d5413b;
+  --green: #1e9a62;
+  --green-soft: #def4e9;
+
+  --f-display: 'Bricolage Grotesque Variable', 'Onest Variable', system-ui, sans-serif;
+  --f-body: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--board);
+  color: var(--chalk);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s;
+}
+body.light { background: #eef0fb; color: var(--ink); }
+#app { min-height: 100dvh; }
+
+h1, h2, h3, h4 { font-family: var(--f-display); margin: 0; letter-spacing: -0.02em; line-height: 1.08; }
+p { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+a { color: inherit; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+:focus-visible { outline: 3px solid var(--marker); outline-offset: 3px; border-radius: 6px; }
+.paper :focus-visible, body.light :focus-visible { outline-color: var(--pen); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ----------------------------------------------------- doska foni */
+.board-bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(1100px 650px at 8% -12%, rgba(120, 140, 255, 0.4), transparent 62%),
+    radial-gradient(900px 600px at 108% 24%, rgba(255, 255, 255, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--board-2), var(--board) 70%);
+  transition: opacity 0.4s;
+}
+.board-bg::after {
+  content: ''; position: absolute; inset: 0; opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body.light .board-bg { opacity: 0; }
+
+/* -------------------------------------------- daftar varag‘i (katak) */
+.paper {
+  --mx: 18px;
+  position: relative;
+  background-color: var(--paper);
+  color: var(--ink);
+  border-radius: 16px;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: -1px -1px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 34px 60px -30px rgba(0, 0, 0, 0.6),
+    0 10px 20px -12px rgba(0, 0, 0, 0.45);
+}
+.paper.margin::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: var(--mx);
+  width: 2px; background: rgba(213, 65, 59, 0.5); border-radius: 2px;
+}
+@media (min-width: 700px) { .paper { --mx: 54px; } }
+
+.card {
+  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(21, 34, 61, 0.04), 0 12px 24px -18px rgba(21, 34, 61, 0.25);
+}
+
+/* ------------------------------------------------------- tugmalar */
+.btn {
+  --bg: #fff; --fg: var(--ink); --bd: var(--ink); --sh: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  padding: 0.85em 1.4em; border: 2px solid var(--bd); border-radius: 12px;
+  background: var(--bg); color: var(--fg); font-weight: 700; font-size: 1rem; line-height: 1.1;
+  cursor: pointer; text-decoration: none; user-select: none; -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 0 var(--sh);
+  transition: transform 0.12s var(--ease-out), box-shadow 0.12s var(--ease-out), background-color 0.15s, opacity 0.2s;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--sh); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--sh); }
+.btn:disabled, .btn[aria-disabled='true'] { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: 0 4px 0 var(--sh); }
+.btn-marker { --bg: var(--marker); --bd: #060b45; --sh: #060b45; --fg: var(--pen); }
+/* oq varaq va yorug‘ admin ichida tugma logotip ko‘kida bo‘ladi */
+.paper .btn-marker, body.light .btn-marker { --bg: var(--pen); --fg: #fff; --bd: #0a1163; --sh: #0a1163; }
+.btn-ink { --bg: var(--ink); --fg: #fff; --bd: var(--ink); --sh: #0a1226; }
+.btn-outline { --bg: #fff; }
+.btn-chalk { --bg: transparent; --fg: var(--chalk); --bd: var(--chalk); --sh: rgba(244, 246, 255, 0.35); }
+.btn-danger { --bg: #fff; --fg: var(--red); --bd: var(--red); --sh: var(--red); }
+.btn.sm { padding: 0.55em 1em; font-size: 0.9rem; border-radius: 10px; box-shadow: 0 3px 0 var(--sh); }
+.btn.sm:hover { box-shadow: 0 4px 0 var(--sh); }
+.btn.sm:active { box-shadow: 0 1px 0 var(--sh); }
+.btn.block { display: flex; width: 100%; }
+.btn.big { font-size: 1.1rem; padding: 1em 1.8em; }
+
+.spinner {
+  width: 1em; height: 1em; border-radius: 50%;
+  border: 2.5px solid currentColor; border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ------------------------------------------------------ maydonlar */
+.field { display: grid; gap: 0.45rem; }
+.field > label, .lbl { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
+.input {
+  width: 100%; padding: 0.85em 1em; border: 2px solid var(--ink); border-radius: 12px;
+  background: #fff; color: var(--ink); box-shadow: 0 3px 0 var(--ink);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.input:focus { outline: none; border-color: var(--pen); box-shadow: 0 3px 0 var(--pen); }
+.input::placeholder { color: #8a94ab; }
+.input.compact { border-width: 1.5px; border-color: var(--line); box-shadow: none; padding: 0.62em 0.85em; }
+.input.compact:focus { border-color: var(--pen); box-shadow: 0 0 0 3px rgba(35, 86, 216, 0.15); }
+
+/* ------------------------------------------- sahifa o‘tish animatsiyasi */
+.route-enter-active, .route-leave-active { transition: opacity 0.25s ease, transform 0.4s var(--ease-out); }
+.route-enter-from { opacity: 0; transform: translateY(14px); }
+.route-leave-to { opacity: 0; }
+
+.phase-enter-active { transition: opacity 0.3s ease, transform 0.55s var(--ease-out); }
+.phase-leave-active { transition: opacity 0.18s ease; }
+.phase-enter-from { opacity: 0; transform: translateY(20px) scale(0.985); }
+.phase-leave-to { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

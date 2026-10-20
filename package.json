@@ -1,0 +1,23 @@
+{
+  "name": "test-platforma",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ustozlar uchun test platformasi (Vue 3 + Node.js)",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "test": "node --disable-warning=ExperimentalWarning test/logic.test.js"
+  },
+  "dependencies": {
+    "compression": "^1.8.0",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "multer": "^2.0.0",
+    "pg": "^8.13.0"
+  }
+}
