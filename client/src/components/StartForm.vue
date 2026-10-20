@@ -116,7 +116,7 @@ async function submit() {
 
       <div class="plan" aria-live="polite">
         <template v-if="!subject">
-          <p class="plan-hint">Kasbni tanlang, test bosqichlari shu yerda ko‘rinadi.</p>
+          <p class="plan-hint"></p>
         </template>
         <ol v-else>
           <li v-if="hasAcademic || isStaff">

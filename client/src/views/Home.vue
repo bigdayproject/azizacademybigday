@@ -33,8 +33,7 @@ onMounted(async () => {
             <span class="ln" style="--i: 1">sinab ko‘ring.</span>
           </h1>
           <p class="lead">
-            Kasb va filialingizni tanlang. Fan o‘qituvchilari ikki bosqich ishlaydi: avval Academic
-            savollar, keyin o‘z fani. Javoblar har bosishda o‘zi saqlanadi, chiqib ketsangiz davom etasiz.
+          
           </p>
           <div class="cta">
             <RouterLink class="btn btn-marker big" to="/test">Testni boshlash</RouterLink>
