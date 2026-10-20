@@ -32,9 +32,6 @@ onMounted(async () => {
             <span class="ln" style="--i: 0">Bilimingizni</span>
             <span class="ln" style="--i: 1">sinab ko‘ring.</span>
           </h1>
-          <p class="lead">
-          
-          </p>
           <div class="cta">
             <RouterLink class="btn btn-marker big" to="/test">Testni boshlash</RouterLink>
             <RouterLink class="btn btn-chalk big" to="/admin">Admin</RouterLink>
@@ -76,12 +73,29 @@ onMounted(async () => {
 .ln { display: block; padding-bottom: 0.08em; clip-path: inset(0 100% 0 0); animation: write 0.9s var(--ease-out) forwards; animation-delay: calc(0.35s + var(--i) * 0.28s); }
 @keyframes write { to { clip-path: inset(0 -2% 0 0); } }
 
-.lead { margin-top: 26px; max-width: 29em; font-size: clamp(1.05rem, 2.4vw, 1.22rem); line-height: 1.6; color: var(--chalk-dim); opacity: 0; animation: rise 0.6s var(--ease-out) 1s forwards; }
-.cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; opacity: 0; animation: rise 0.6s var(--ease-out) 1.15s forwards; }
+.cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 16px; opacity: 0; animation: rise 0.6s var(--ease-out) 1.15s forwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 .art { width: min(100%, 470px); justify-self: center; padding-right: 26px; }
-@media (max-width: 919px) { .art { order: -1; width: min(70%, 300px); } .hero { padding-top: 12px; } }
+@media (max-width: 919px) { .art { order: -1; width: min(70%, 300px); padding-right: 22px; } .hero { padding-top: 22px; } }
+
+/* Kichik ekranlarda hamma narsa o‘rtada */
+@media (max-width: 919px) {
+  .inner { padding: 20px 16px 44px; }
+  .brand { justify-content: center; }
+  .hero { gap: 22px; text-align: center; }
+  .cta { justify-content: center; }
+  .subjects { text-align: center; }
+  .subjects ul { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .hero { gap: 14px; }
+  .cta { flex-direction: column; align-items: stretch; gap: 12px; max-width: 320px; margin-inline: auto; margin-top: 26px; }
+  .cta .btn { justify-content: center; text-align: center; }
+  .subjects { margin-top: 36px; padding-top: 22px; }
+  .subjects h2 { font-size: 0.98rem; }
+  .subjects li { padding: 6px 13px; font-size: 0.9rem; }
+}
 
 .subjects { margin-top: clamp(44px, 9vh, 96px); padding-top: 26px; border-top: 1.5px solid var(--chalk-line); opacity: 0; animation: rise 0.6s var(--ease-out) 1.35s forwards; }
 .subjects h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: 0; color: var(--chalk-dim); font-family: var(--f-body); margin-bottom: 16px; }
@@ -90,6 +104,6 @@ onMounted(async () => {
 .subjects li:hover { background: #fff; color: var(--pen); border-color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ln, .lead, .cta, .subjects { animation: none; opacity: 1; clip-path: none; }
+  .ln, .cta, .subjects { animation: none; opacity: 1; clip-path: none; }
 }
 </style>

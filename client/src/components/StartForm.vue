@@ -114,11 +114,8 @@ async function submit() {
         <BaseSelect id="br" v-model="branch" :options="meta.branches" placeholder="Filialni tanlang" :invalid="touched && !branch" />
       </div>
 
-      <div class="plan" aria-live="polite">
-        <template v-if="!subject">
-          <p class="plan-hint"></p>
-        </template>
-        <ol v-else>
+      <div v-if="subject" class="plan" aria-live="polite">
+        <ol>
           <li v-if="hasAcademic || isStaff">
             <b>1-bosqich: Academic savollar</b>
             <span>{{ meta.academic_duration_min }} daqiqa</span>
@@ -172,7 +169,6 @@ h1 { font-size: clamp(1.9rem, 6vw, 2.5rem); font-weight: 800; }
 .sub { color: var(--ink-soft); margin-top: -12px; }
 
 .plan { padding: 12px 14px; border-radius: 12px; background: var(--pen-soft); color: #1d3a8f; font-size: 0.95rem; line-height: 1.45; }
-.plan-hint { color: #4a5fb0; }
 .plan ol { display: grid; gap: 8px; }
 .plan li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 12px; }
 .plan li b { color: #0f1b66; min-width: 0; overflow-wrap: anywhere; }
